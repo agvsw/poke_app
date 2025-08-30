@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef, useCallback } from 'react';
 
@@ -59,14 +60,16 @@ export default function HomePage() {
       </h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6">
-        {pokemons.map((pokemon) => {
+        {pokemons.map((pokemon, index) => {
           const id = pokemon.url.split('/').filter(Boolean).pop();
           return (
-            <Link key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
+            <Link key={`${pokemon.name}-${index}`} href={`/pokemon/${pokemon.name}`}>
               <div className="bg-white shadow-md rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
-                <img
+                <Image
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
                   alt={pokemon.name}
+                  width={96}
+                  height={96}
                   className="mx-auto"
                 />
                 <p className="text-center capitalize font-semibold mt-2">
